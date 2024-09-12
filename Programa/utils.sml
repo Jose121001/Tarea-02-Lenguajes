@@ -34,3 +34,5 @@ fun trim s =
     (* Reconstruir la cadena desde la lista de caracteres *)
     String.implode trimmedChars
   end;
+
+

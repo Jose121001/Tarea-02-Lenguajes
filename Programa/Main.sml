@@ -1,6 +1,11 @@
 (*Importacion de archivos*)
 use "agregarRegistros.sml";
 use "limpiarIndice.sml";
+use "mostrarTop.sml";
+use "informeActividadesSospechosas.sml";
+
+
+use "resumen.sml";
 use "utils.sml";
 
 
@@ -11,17 +16,17 @@ fun main () =
       let
         (* Eliminar los espacios en blanco al principio y al final *)
         val rutaLimpia = trim ruta
-        (* Convertir la cadena a una lista de caracteres *)
+        (* Conviertela cadena a una lista de caracteres *)
         val listaCaracteres = String.explode rutaLimpia
-        (* Filtrar solo los caracteres que no sean saltos de línea o retorno de carro *)
+        (* Filtra solo los caracteres que no sean saltos de línea o retorno de carro *)
         val listaFiltrada = List.filter (fn c => c <> #"\n" andalso c <> #"\r") listaCaracteres
-        (* Reconstruir la cadena limpia *)
+        (* Ponemos la cadena limpia *)
         val rutaFinal = String.implode listaFiltrada
       in
         rutaFinal
       end
 
-    (* Solicitar la ruta del archivo al iniciar y limpiar la entrada *)
+    (* Solicita la ruta del archivo al iniciar y limpiar la entrada *)
     fun solicitarRutaArchivo () =
       (
         print "Ingrese la ruta del archivo de transacciones (por ejemplo, C:\\Users\\joses\\Documents\\datatransacciones.csv):\n";
@@ -51,35 +56,38 @@ fun main () =
         print ("d. Cantidad de transacciones por tipo\n");
         print ("e. Resumen\n");
         print ("f. Volver al menu principal\n");
-        print ("Opción: ")
+        print ("Opcion: ")
       )
 
     (* Declarar funciones mutuamente recursivas con "and" *)
     (*Se llaman las funciones segun su opc*)
+  (* Declarar funciones mutuamente recursivas con "and" *)
+    (*Se llaman las funciones segun su opcion*)
     fun handleMainMenu archivoRuta =
       let
+        val _ = printMainMenu ()  (* Mostrar el menú principal *)
         val option = TextIO.inputLine TextIO.stdIn
       in
         case option of
-            SOME "1\n" => (agregarRegistro archivoRuta; handleMainMenu archivoRuta)
+            SOME "1\n" => (agregarRegistro archivoRuta; handleMainMenu archivoRuta)  (* Llama nuevamente después de la opción *)
           | SOME "2\n" => (limpiarIndice archivoRuta; handleMainMenu archivoRuta)
-          | SOME "3\n" => (print "Ir al menu de Analizador\n"; handleAnalyzerMenu archivoRuta)
+          | SOME "3\n" => (handleAnalyzerMenu archivoRuta)  (* Ir al menú del Analizador *)
           | SOME "4\n" => print "Saliendo...\n"
-          | _ => (print "Opción invqlida, intente de nuevo.\n"; handleMainMenu archivoRuta)
+          | _ => (print "Opción inválida, intente de nuevo.\n"; handleMainMenu archivoRuta)
       end
-    (*Si no se utiliza el and daria error de llamamiento ya que se estan llamado al mismo tiempo*)
     and handleAnalyzerMenu archivoRuta =
       let
+        val _ = printAnalyzerMenu ()  (* Mostrar el menú del Analizador *)
         val option = TextIO.inputLine TextIO.stdIn
       in
-        case option of
-            SOME "a\n" => (print "Mostrar top por monto\n"; handleAnalyzerMenu archivoRuta)
-          | SOME "b\n" => (print "Informe de actividades sospechosas\n"; handleAnalyzerMenu archivoRuta)
+         case option of
+            SOME "a\n" => (mostrarTop archivoRuta; handleAnalyzerMenu archivoRuta)
+          | SOME "b\n" => (informeActividadesSospechosas archivoRuta; handleAnalyzerMenu archivoRuta)
           | SOME "c\n" => (print "Transacciones por cuenta\n"; handleAnalyzerMenu archivoRuta)
           | SOME "d\n" => (print "Cantidad de transacciones por tipo\n"; handleAnalyzerMenu archivoRuta)
-          | SOME "e\n" => (print "Resumen\n"; handleAnalyzerMenu archivoRuta)
+          | SOME "e\n" => (generarResumen archivoRuta; handleAnalyzerMenu archivoRuta)
           | SOME "f\n" => handleMainMenu archivoRuta
-          | _ => (print "Opción inválida, intente de nuevo.\n"; handleAnalyzerMenu archivoRuta)
+          | _ => (print "Opcion invalida, intente de nuevo.\n"; handleAnalyzerMenu archivoRuta)
       end
   in
     (* Iniciar el programa solicitando la ruta del archivo *)
@@ -87,7 +95,6 @@ fun main () =
       val archivoRuta = solicitarRutaArchivo ()
     in
       (* Mostrar el menú principal una vez obtenida la ruta del archivo *)
-      printMainMenu ();
       handleMainMenu archivoRuta
     end
   end;
