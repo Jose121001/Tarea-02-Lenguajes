@@ -1,5 +1,6 @@
 (*Importacion de archivos*)
 use "agregarRegistros.sml";
+use "limpiarIndice.sml";
 use "utils.sml";
 
 
@@ -61,7 +62,7 @@ fun main () =
       in
         case option of
             SOME "1\n" => (agregarRegistro archivoRuta; handleMainMenu archivoRuta)
-          | SOME "2\n" => (print "Limpiar indice\n"; handleMainMenu archivoRuta)
+          | SOME "2\n" => (limpiarIndice archivoRuta; handleMainMenu archivoRuta)
           | SOME "3\n" => (print "Ir al menu de Analizador\n"; handleAnalyzerMenu archivoRuta)
           | SOME "4\n" => print "Saliendo...\n"
           | _ => (print "Opción invqlida, intente de nuevo.\n"; handleMainMenu archivoRuta)
