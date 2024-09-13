@@ -35,14 +35,14 @@ fun mostrarTop (archivoRuta: string) =
               in
                 (case Real.fromString lineaLimpia of
                      SOME r => r
-                   | NONE => (print "Entrada no valida. Por favor, ingrese un número real en formato valido (por ejemplo, 100.50). No use comas ni puntos para separar miles.\n"; solicitarReal mensaje))
+                   | NONE => (print "Entrada no valida. Por favor, ingrese un numero real en formato valido (por ejemplo, 100.50). No use comas ni puntos para separar miles.\n"; solicitarReal mensaje))
               end
           | NONE => (print "Error al leer la entrada, por favor intente de nuevo.\n"; solicitarReal mensaje)
       end
 
     (* Solicitar el monto mínimo y máximo *)
-    val minMonto = solicitarReal "Ingrese el monto minimo (número real, por ejemplo, 20.0):\n"
-    val maxMonto = solicitarReal "Ingrese el monto maximo (número real, por ejemplo, 200000.0):\n"
+    val minMonto = solicitarReal "Ingrese el monto minimo (numero real, por ejemplo, 20.0):\n"
+    val maxMonto = solicitarReal "Ingrese el monto maximo (numero real, por ejemplo, 200000.0):\n"
 
     (* Función auxiliar para convertir una línea de texto a un registro de transacción *)
     fun parsearLinea linea =

@@ -38,7 +38,7 @@ fun main () =
     (* Función para imprimir el menú principal *)
     fun printMainMenu () =
       (
-        print ("Bienvenido al sistema bancario, seleccione la opción a trabajar:\n");
+        print ("Bienvenido al sistema bancario, seleccione la opcion a trabajar:\n");
         print ("1- Agregar Registros\n");
         print ("2- Limpiar indice\n");
         print ("3- Menu de Analizador\n");

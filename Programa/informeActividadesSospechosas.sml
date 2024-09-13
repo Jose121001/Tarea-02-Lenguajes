@@ -79,7 +79,7 @@ fun informeActividadesSospechosas (archivoRuta: string) =
 
     (* Función para imprimir las transacciones sospechosas con formato *)
     fun imprimirSospechosas (cuenta, fecha, count) =
-      print ("Cuenta Origen: " ^ cuenta ^ "\tFecha: " ^ fecha ^ "\tNúmero de transacciones sospechosas: " ^ Int.toString count ^ "\n")
+      print ("Cuenta Origen: " ^ cuenta ^ "\tFecha: " ^ fecha ^ "\tNumero de transacciones sospechosas: " ^ Int.toString count ^ "\n")
 
   in
     print "Informe de actividades sospechosas:\n";

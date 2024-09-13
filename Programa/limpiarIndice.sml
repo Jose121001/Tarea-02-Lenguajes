@@ -8,5 +8,5 @@ fun limpiarIndice (archivoRuta: string) =
     (* Cerrar el archivo inmediatamente después de abrirlo para que quede vacío *)
     TextIO.closeOut outputStream;
     (* Imprimir un mensaje de confirmación *)
-    TextIO.print "El índice ha sido limpiado exitosamente.\n"
+    TextIO.print "El indice ha sido limpiado exitosamente.\n"
   end;

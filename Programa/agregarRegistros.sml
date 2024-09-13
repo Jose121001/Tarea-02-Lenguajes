@@ -20,7 +20,7 @@ fun agregarRegistro archivoRuta =
     (* Solicita número de cuenta destino solo si es una transferencia *)
     val cuentaDestino =
       if trim tipoTransaccion = "transferencia" then
-        (TextIO.print "Ingrese el número de cuenta destino: "; valOf (TextIO.inputLine TextIO.stdIn))
+        (TextIO.print "Ingrese el numero de cuenta destino: "; valOf (TextIO.inputLine TextIO.stdIn))
       else
         ""
 
